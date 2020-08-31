@@ -2,6 +2,8 @@
 
 A Quasar app for manage todos
 
+This project contains an implementation of "Awesome Todo" app shown in the Udemy's course [Quasar Framework: Cross-Platform Vue JS Vuex & Firebase Apps](https://www.udemy.com/course/quasarframework/).
+
 ## Install the dependencies
 
 ```bash
