@@ -17,12 +17,15 @@
       </q-toolbar>
     </q-header>
 
-    <q-footer>
+    <q-footer
+      class="lt-md"
+      :v-show="$q.screen.lt.md"
+    >
       <q-tabs align="center">
         <TabLink
-          v-for="(link, index) in links"
+          v-for="link in links"
           :link="link"
-          :key="index"
+          :key="link.title"
         />
       </q-tabs>
     </q-footer>
@@ -32,6 +35,7 @@
       show-if-above
       bordered
       content-class="bg-grey-1"
+      :v-show="$q.screen.gt.md"
     >
       <q-list>
         <q-item-label
@@ -78,6 +82,6 @@ export default {
       leftDrawerOpen: false,
       links: linksData,
     }
-  },
+  }
 }
 </script>
