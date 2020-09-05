@@ -1,32 +1,14 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout view="HHh lpr fFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="leftDrawerOpen = !leftDrawerOpen"
-        />
-
-        <q-toolbar-title> Quasar App </q-toolbar-title>
-
-        <div>Quasar v{{ $q.version }}</div>
+        <q-toolbar-title class="absolute-center">Awesome Todo</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <q-footer
-      class="lt-md"
-      :v-show="$q.screen.lt.md"
-    >
+    <q-footer class="lt-md" :v-show="$q.screen.lt.md">
       <q-tabs align="center">
-        <TabLink
-          v-for="link in links"
-          :link="link"
-          :key="link.title"
-        />
+        <TabLink v-for="link in links" :link="link" :key="link.title" />
       </q-tabs>
     </q-footer>
 
@@ -38,17 +20,10 @@
       :v-show="$q.screen.gt.md"
     >
       <q-list>
-        <q-item-label
-          header
-          class="text-grey-8"
-        >
+        <q-item-label header class="text-grey-8">
           Navigation
         </q-item-label>
-        <EssentialLink
-          v-for="link in links"
-          :key="link.title"
-          :link="link"
-        />
+        <EssentialLink v-for="link in links" :key="link.title" :link="link" />
       </q-list>
     </q-drawer>
     <q-page-container>
@@ -75,13 +50,13 @@ export default {
   name: 'MainLayout',
   components: {
     EssentialLink: require('components/EssentialLink.vue').default,
-    TabLink: require('components/TabLink').default
+    TabLink: require('components/TabLink').default,
   },
   data() {
     return {
       leftDrawerOpen: false,
       links: linksData,
     }
-  }
+  },
 }
 </script>
