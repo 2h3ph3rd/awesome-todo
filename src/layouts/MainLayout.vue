@@ -17,6 +17,16 @@
       </q-toolbar>
     </q-header>
 
+    <q-footer>
+      <q-tabs align="center">
+        <TabLink
+          v-for="(link, index) in links"
+          :link="link"
+          :key="index"
+        />
+      </q-tabs>
+    </q-footer>
+
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
@@ -31,7 +41,7 @@
           Navigation
         </q-item-label>
         <EssentialLink
-          v-for="link in essentialLinks"
+          v-for="link in links"
           :key="link.title"
           :link="link"
         />
@@ -44,8 +54,6 @@
 </template>
 
 <script>
-import EssentialLink from 'components/EssentialLink.vue'
-
 const linksData = [
   {
     title: 'Todo',
@@ -61,11 +69,14 @@ const linksData = [
 
 export default {
   name: 'MainLayout',
-  components: { EssentialLink },
+  components: {
+    EssentialLink: require('components/EssentialLink.vue').default,
+    TabLink: require('components/TabLink').default
+  },
   data() {
     return {
       leftDrawerOpen: false,
-      essentialLinks: linksData,
+      links: linksData,
     }
   },
 }
