@@ -1,12 +1,27 @@
 <template>
   <q-page padding>
-    <ul>
-      <task
+    <q-list
+      separator
+      bordered
+    >
+      <q-item
         v-for="(task, index) in tasks"
         :key="index"
-        :task="task"
-      />
-    </ul>
+        tag="label"
+        clickable
+        v-ripple
+        :class="task.completed ? 'bg-green-1' : 'bg-orange-1'"
+      >
+        <q-item-section avatar>
+          <q-checkbox v-model="task.completed" />
+        </q-item-section>
+        <q-item-section :class="{ 'text-strikethrough' : task.completed }">{{ task.name }}</q-item-section>
+        <q-item-section side>
+          <q-item-label>{{ task.dueDate }}</q-item-label>
+          <q-item-label caption>{{ task.dueTime }}</q-item-label>
+        </q-item-section>
+      </q-item>
+    </q-list>
   </q-page>
 </template>
 
@@ -16,9 +31,9 @@ export default {
   data() {
     return {
       tasks: [
-        { name: 'Go to shop', dueDate: '2020/09/02', dueTime: '10:30' },
-        { name: 'Buy bananas', dueDate: '2020/09/01', dueTime: '12:30' },
-        { name: 'Buy apples', dueDate: '2020/09/04', dueTime: '18:30' },
+        { name: 'Go to shop', dueDate: '2020/09/02', dueTime: '10:30', completed: false },
+        { name: 'Buy bananas', dueDate: '2020/09/01', dueTime: '12:30', completed: false },
+        { name: 'Buy apples', dueDate: '2020/09/04', dueTime: '18:30', completed: false },
       ],
     }
   },
@@ -28,7 +43,7 @@ export default {
     },
   },
   components: {
-    'task': require('components/Task').default,
+    // 'task': require('components/Task').default,
   }
 }
 </script>
