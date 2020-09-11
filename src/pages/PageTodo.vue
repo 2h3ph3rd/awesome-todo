@@ -1,8 +1,21 @@
 <template>
   <q-page padding>
-    <q-list separator bordered>
+    <q-list separator bordered v-if="Object.keys(tasks).length">
       <task v-for="(task, id) in tasks" :key="id" :task="task" :id="id"></task>
     </q-list>
+    <div v-else>Nothing to do</div>
+    <div class="absolute-bottom text-right q-ma-lg">
+      <q-btn
+        round
+        color="primary"
+        size="lg"
+        icon="add"
+        @click="showAddTask = true"
+      />
+    </div>
+    <q-dialog v-model="showAddTask" persistent>
+      <add-task @close="showAddTask = false" />
+    </q-dialog>
   </q-page>
 </template>
 
@@ -11,6 +24,11 @@ import { mapGetters } from 'vuex'
 
 export default {
   name: 'Index',
+  data() {
+    return {
+      showAddTask: false
+    }
+  },
   computed: {
     ...mapGetters('tasks', ['tasks'])
   },
@@ -20,7 +38,8 @@ export default {
     }
   },
   components: {
-    task: require('components/Tasks/Task').default
+    task: require('components/Tasks/Task').default,
+    'add-task': require('components/Tasks/Modals/AddTask').default
   }
 }
 </script>

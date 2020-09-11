@@ -11,6 +11,9 @@
     <q-item-section :class="{ 'text-strikethrough': task.completed }">{{
       task.name
     }}</q-item-section>
+    <q-item-section side v-if="task.dueDate">
+      <q-icon name="event" />
+    </q-item-section>
     <q-item-section side>
       <q-item-label>{{ task.dueDate }}</q-item-label>
       <q-item-label caption>{{ task.dueTime }}</q-item-label>
@@ -21,9 +24,10 @@
         round
         icon="delete"
         color="red"
-        @click.stop="confirm = true"
+        @click.stop="confirmDialog = true"
       />
-      <q-dialog v-model="confirm" persistent>
+
+      <q-dialog v-model="confirmDialog" persistent>
         <q-card class="q-pa-sm">
           <q-card-section class="row items-center">
             Do you really want to delete this task?
@@ -36,7 +40,7 @@
               label="Delete"
               color="red"
               v-close-popup
-              @click="deleteTask({ id })"
+              @click="deleteTask(id)"
             />
           </q-card-actions>
         </q-card>
@@ -52,12 +56,11 @@ import { Dialog } from 'quasar'
 export default {
   name: 'Task',
   data() {
-    return { confirm: false }
+    return { confirmDialog: false }
   },
   props: ['task', 'id'],
   methods: {
-    ...mapActions('tasks', ['updateTask', 'deleteTask']),
-    promptDeleteTask() {}
+    ...mapActions('tasks', ['updateTask', 'deleteTask'])
   }
 }
 </script>
