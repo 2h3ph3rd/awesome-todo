@@ -14,7 +14,7 @@
       />
     </div>
     <q-dialog v-model="showAddTask" persistent>
-      <add-task @close="showAddTask = false" />
+      <add-task />
     </q-dialog>
   </q-page>
 </template>
@@ -39,7 +39,7 @@ export default {
   },
   components: {
     task: require('components/Tasks/Task').default,
-    'add-task': require('components/Tasks/Modals/AddTask').default
+    'add-task': require('components/Tasks/AddTask').default
   }
 }
 </script>

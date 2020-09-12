@@ -22,28 +22,24 @@
       <q-btn
         flat
         round
-        icon="delete"
-        color="red"
-        @click.stop="confirmDialog = true"
+        color="primary"
+        icon="edit"
+        @click.stop="showEditTaskDialog = true"
       />
-
-      <q-dialog v-model="confirmDialog" persistent>
-        <q-card class="q-pa-sm">
-          <q-card-section class="row items-center">
-            Do you really want to delete this task?
-          </q-card-section>
-
-          <q-card-actions align="right">
-            <q-btn flat label="Cancel" color="primary" v-close-popup />
-            <q-btn
-              flat
-              label="Delete"
-              color="red"
-              v-close-popup
-              @click="deleteTask(id)"
-            />
-          </q-card-actions>
-        </q-card>
+      <q-dialog v-model="showEditTaskDialog" persistent>
+        <edit-task :task="task" :id="id" @close="showEditTaskDialog = false" />
+      </q-dialog>
+    </q-item-section>
+    <q-item-section side>
+      <q-btn
+        flat
+        round
+        color="red"
+        icon="delete"
+        @click.stop="showDeleteTaskDialog = true"
+      />
+      <q-dialog v-model="showDeleteTaskDialog" persistent>
+        <delete-task @delete="deleteTask(id)" />
       </q-dialog>
     </q-item-section>
   </q-item>
@@ -56,11 +52,15 @@ import { Dialog } from 'quasar'
 export default {
   name: 'Task',
   data() {
-    return { confirmDialog: false }
+    return { showEditTaskDialog: false, showDeleteTaskDialog: false }
   },
   props: ['task', 'id'],
   methods: {
     ...mapActions('tasks', ['updateTask', 'deleteTask'])
+  },
+  components: {
+    'delete-task': require('components/Tasks/DeleteTask').default,
+    'edit-task': require('components/Tasks/EditTask').default
   }
 }
 </script>
