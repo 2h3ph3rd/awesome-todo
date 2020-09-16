@@ -1,9 +1,17 @@
 <template>
   <q-page padding>
-    <q-list separator bordered v-if="Object.keys(tasks).length">
-      <task v-for="(task, id) in tasks" :key="id" :task="task" :id="id"></task>
-    </q-list>
-    <div v-else>Nothing to do</div>
+    <div class="q-mb-md">
+      <search></search>
+    </div>
+    <tasks-todo
+      v-if="Object.keys(tasksTodo).length"
+      :tasksTodo="tasksTodo"
+    ></tasks-todo>
+    <no-tasks v-else></no-tasks>
+    <tasks-completed
+      v-if="Object.keys(tasksCompleted).length"
+      :tasksCompleted="tasksCompleted"
+    ></tasks-completed>
     <div class="absolute-bottom text-right q-ma-lg">
       <q-btn
         round
@@ -30,16 +38,22 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('tasks', ['tasks'])
+    ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted'])
   },
   methods: {
     deleteTask(index) {
       this.tasks.splice(index, 1)
     }
   },
+  mounted() {
+    this.$root.$on('show-add-task', () => (this.showAddTask = true))
+  },
   components: {
-    task: require('components/Tasks/Task').default,
-    'add-task': require('components/Tasks/AddTask').default
+    'add-task': require('components/Tasks/AddTask').default,
+    'tasks-todo': require('components/Tasks/TasksTodo').default,
+    'tasks-completed': require('components/Tasks/TasksCompleted').default,
+    'no-tasks': require('components/Tasks/NoTasks').default,
+    search: require('components/Tasks/Tools/Search').default
   }
 }
 </script>
