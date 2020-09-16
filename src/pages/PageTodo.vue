@@ -3,11 +3,20 @@
     <div class="q-mb-md">
       <search></search>
     </div>
+    <p
+      v-if="
+        search &&
+          !Object.keys(tasksTodo).length &&
+          !Object.keys(tasksCompleted).length
+      "
+    >
+      No search results
+    </p>
     <tasks-todo
       v-if="Object.keys(tasksTodo).length"
       :tasksTodo="tasksTodo"
     ></tasks-todo>
-    <no-tasks v-else></no-tasks>
+    <no-tasks v-else-if="!search"></no-tasks>
     <tasks-completed
       v-if="Object.keys(tasksCompleted).length"
       :tasksCompleted="tasksCompleted"
@@ -28,7 +37,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'Index',
@@ -38,6 +47,7 @@ export default {
     }
   },
   computed: {
+    ...mapState('tasks', ['search']),
     ...mapGetters('tasks', ['tasksTodo', 'tasksCompleted'])
   },
   methods: {
