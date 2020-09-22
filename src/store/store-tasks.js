@@ -3,26 +3,27 @@ import { uid } from 'quasar'
 
 const state = {
   tasks: {
-    '1': {
+    ID1: {
       name: 'Go to shop',
       dueDate: '2020/09/02',
       dueTime: '10:30',
       completed: false
     },
-    '2': {
+    ID2: {
       name: 'Buy bananas',
       dueDate: '2020/09/01',
       dueTime: '12:30',
       completed: false
     },
-    '3': {
+    ID3: {
       name: 'Buy apples',
       dueDate: '2020/09/04',
       dueTime: '18:30',
       completed: false
     }
   },
-  search: ''
+  search: '',
+  sort: 'name'
 }
 
 const mutations = {
@@ -61,18 +62,33 @@ const actions = {
 }
 
 const getters = {
-  tasksFiltered: state => {
+  tasksSorted: state => {
+    let tasksSorted = {}
+    let keysSorted = Object.keys(state.tasks)
+    keysSorted.sort((a, b) => {
+      return state.tasks[a][state.sort].toLowerCase() >
+        state.tasks[b][state.sort].toLowerCase()
+        ? 1
+        : -1
+    })
+    keysSorted.forEach(key => {
+      tasksSorted[key] = state.tasks[key]
+    })
+    return tasksSorted
+  },
+  tasksFiltered: (state, getters) => {
+    let tasksSorted = getters.tasksSorted
     let tasksFiltered = {}
     if (state.search) {
-      Object.keys(state.tasks).forEach(key => {
-        let task = state.tasks[key]
+      Object.keys(tasksSorted).forEach(key => {
+        let task = tasksSorted[key]
         if (task.name.toLowerCase().includes(state.search.toLowerCase())) {
           tasksFiltered[key] = task
         }
       })
       return tasksFiltered
     }
-    return state.tasks
+    return tasksSorted
   },
   tasksTodo: (state, getters) => {
     let tasksFiltered = getters.tasksFiltered

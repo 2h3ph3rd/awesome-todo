@@ -1,9 +1,17 @@
 <template>
-  <q-input v-model="searchField" label="Search" outlined class="col" clearable>
-    <template v-slot:append>
-      <q-icon name="search" />
-    </template>
-  </q-input>
+  <div class="column">
+    <q-input
+      v-model="searchField"
+      label="Search"
+      outlined
+      class="col"
+      clearable
+    >
+      <template v-slot:prepend>
+        <q-icon name="search" />
+      </template>
+    </q-input>
+  </div>
 </template>
 
 <script>

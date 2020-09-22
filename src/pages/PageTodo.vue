@@ -1,21 +1,27 @@
 <template>
   <q-page padding>
-    <div class="q-mb-md">
-      <search></search>
+    <div class="row">
+      <div class="col-md-9 col-12 q-mr-md q-mb-md">
+        <search></search>
+      </div>
+      <div class="col-md col-12 q-mb-md">
+        <sort></sort>
+      </div>
     </div>
-    <p
-      v-if="
-        search &&
-          !Object.keys(tasksTodo).length &&
-          !Object.keys(tasksCompleted).length
-      "
-    >
+    <p v-if="
+      search
+      &&
+      !Object.keys(tasksTodo).length
+      &&
+      !Object.keys(tasksCompleted).length ">
       No search results
     </p>
     <tasks-todo
-      v-if="Object.keys(tasksTodo).length"
+      v-if="
+      Object.keys(tasksTodo).length"
       :tasksTodo="tasksTodo"
-    ></tasks-todo>
+    >
+    </tasks-todo>
     <no-tasks v-else-if="!search"></no-tasks>
     <tasks-completed
       v-if="Object.keys(tasksCompleted).length"
@@ -30,7 +36,10 @@
         @click="showAddTask = true"
       />
     </div>
-    <q-dialog v-model="showAddTask" persistent>
+    <q-dialog
+      v-model="showAddTask"
+      persistent
+    >
       <add-task />
     </q-dialog>
   </q-page>
@@ -63,7 +72,8 @@ export default {
     'tasks-todo': require('components/Tasks/TasksTodo').default,
     'tasks-completed': require('components/Tasks/TasksCompleted').default,
     'no-tasks': require('components/Tasks/NoTasks').default,
-    search: require('components/Tasks/Tools/Search').default
+    search: require('components/Tasks/Tools/Search').default,
+    sort: require('components/Tasks/Tools/Sort').default
   }
 }
 </script>
