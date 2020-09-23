@@ -2,8 +2,10 @@
   <div class="column">
     <q-select
       outlined
-      label="Sort"
-      v-model="selectedOption"
+      emit-value
+      map-options
+      label="Sort by"
+      v-model="sortBy"
       :options="options"
     >
       <template v-slot:prepend>
@@ -14,17 +16,32 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   data() {
     return {
       options: [
-        'name', 'dueDate'
-      ],
-      selectedOption: null
+        { label: 'Name', value: 'name' },
+        { label: 'Date', value: 'dueDate' }
+      ]
     }
+  },
+  computed: {
+    ...mapState('tasks', ['sort']),
+    sortBy: {
+      get() {
+        return this.sort
+      },
+      set(value) {
+        this.setSort(value)
+      }
+    }
+  },
+  methods: {
+    ...mapActions('tasks', ['setSort'])
   }
 }
 </script>
 
-<style>
-</style>
+<style></style>
