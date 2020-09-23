@@ -6,7 +6,7 @@
     :class="task.completed ? 'bg-green-1' : 'bg-orange-1'"
   >
     <q-item-section avatar>
-      <q-checkbox :value="task.completed" />
+      <q-checkbox :value="task.completed" @input="onUpdateTask" />
     </q-item-section>
     <q-item-section :class="{ 'text-strikethrough': task.completed }">{{
       task.name
