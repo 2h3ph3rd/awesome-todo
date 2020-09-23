@@ -8,19 +8,16 @@
         <sort></sort>
       </div>
     </div>
-    <p v-if="
-      search
-      &&
-      !Object.keys(tasksTodo).length
-      &&
-      !Object.keys(tasksCompleted).length ">
+    <p
+      v-if="
+        search &&
+          !Object.keys(tasksTodo).length &&
+          !Object.keys(tasksCompleted).length
+      "
+    >
       No search results
     </p>
-    <tasks-todo
-      v-if="
-      Object.keys(tasksTodo).length"
-      :tasksTodo="tasksTodo"
-    >
+    <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo">
     </tasks-todo>
     <no-tasks v-else-if="!search"></no-tasks>
     <tasks-completed
@@ -36,10 +33,7 @@
         @click="showAddTask = true"
       />
     </div>
-    <q-dialog
-      v-model="showAddTask"
-      persistent
-    >
+    <q-dialog v-model="showAddTask" persistent>
       <add-task />
     </q-dialog>
   </q-page>
@@ -68,10 +62,10 @@ export default {
     this.$root.$on('show-add-task', () => (this.showAddTask = true))
   },
   components: {
-    'add-task': require('components/Tasks/AddTask').default,
-    'tasks-todo': require('components/Tasks/TasksTodo').default,
-    'tasks-completed': require('components/Tasks/TasksCompleted').default,
-    'no-tasks': require('components/Tasks/NoTasks').default,
+    'add-task': require('components/Tasks/Modals/AddTask').default,
+    'tasks-todo': require('components/Tasks/List/TasksTodo').default,
+    'tasks-completed': require('components/Tasks/List/TasksCompleted').default,
+    'no-tasks': require('components/Tasks/List/NoTasks').default,
     search: require('components/Tasks/Tools/Search').default,
     sort: require('components/Tasks/Tools/Sort').default
   }

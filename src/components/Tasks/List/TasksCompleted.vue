@@ -16,8 +16,8 @@
 export default {
   props: ['tasksCompleted'],
   components: {
-    task: require('components/Tasks/Task').default,
-    'list-header': require('components/Tasks/Shared/ListHeader').default
+    task: require('components/Tasks/List/Shared/ListTask').default,
+    'list-header': require('components/Tasks/List/Shared/ListHeader').default
   }
 }
 </script>

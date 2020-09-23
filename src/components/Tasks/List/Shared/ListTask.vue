@@ -1,6 +1,6 @@
 <template>
   <q-item
-    @click="updateTask({ id, updates: { completed: !task.completed } })"
+    @click="onUpdateTask"
     clickable
     v-ripple
     :class="task.completed ? 'bg-green-1' : 'bg-orange-1'"
@@ -56,11 +56,19 @@ export default {
   },
   props: ['task', 'id'],
   methods: {
-    ...mapActions('tasks', ['updateTask', 'deleteTask'])
+    ...mapActions('tasks', ['updateTask', 'deleteTask']),
+    onUpdateTask() {
+      this.updateTask({
+        id: this.id,
+        updates: {
+          completed: !this.task.completed
+        }
+      })
+    }
   },
   components: {
-    'delete-task': require('components/Tasks/DeleteTask').default,
-    'edit-task': require('components/Tasks/EditTask').default
+    'delete-task': require('components/Tasks/Modals/DeleteTask').default,
+    'edit-task': require('components/Tasks/Modals/EditTask').default
   }
 }
 </script>
