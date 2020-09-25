@@ -8,16 +8,17 @@
         <sort></sort>
       </div>
     </div>
-    <p
-      v-if="
+    <p v-if="
         search &&
           !Object.keys(tasksTodo).length &&
           !Object.keys(tasksCompleted).length
-      "
-    >
+      ">
       No search results
     </p>
-    <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo">
+    <tasks-todo
+      v-if="Object.keys(tasksTodo).length"
+      :tasksTodo="tasksTodo"
+    >
     </tasks-todo>
     <no-tasks v-else-if="!search"></no-tasks>
     <tasks-completed
@@ -33,7 +34,10 @@
         @click="showAddTask = true"
       />
     </div>
-    <q-dialog v-model="showAddTask" persistent>
+    <q-dialog
+      v-model="showAddTask"
+      persistent
+    >
       <add-task />
     </q-dialog>
   </q-page>

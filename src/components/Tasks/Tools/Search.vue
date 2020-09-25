@@ -5,7 +5,9 @@
       label="Search"
       outlined
       class="col"
+      @keyup.esc="searchField = ''"
       clearable
+      v-select-all
     >
       <template v-slot:prepend>
         <q-icon name="search" />
@@ -16,6 +18,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import { selectAll } from 'src/directives/directive-select-all'
 
 export default {
   computed: {
@@ -31,6 +34,9 @@ export default {
   },
   methods: {
     ...mapActions('tasks', ['setSearch'])
+  },
+  directives: {
+    selectAll
   }
 }
 </script>
