@@ -8,23 +8,24 @@
         <sort></sort>
       </div>
     </div>
-    <p v-if="
+    <p
+      v-if="
         search &&
           !Object.keys(tasksTodo).length &&
           !Object.keys(tasksCompleted).length
-      ">
+      "
+    >
       No search results
     </p>
-    <tasks-todo
-      v-if="Object.keys(tasksTodo).length"
-      :tasksTodo="tasksTodo"
-    >
-    </tasks-todo>
-    <no-tasks v-else-if="!search"></no-tasks>
-    <tasks-completed
-      v-if="Object.keys(tasksCompleted).length"
-      :tasksCompleted="tasksCompleted"
-    ></tasks-completed>
+    <div class="relative-position">
+      <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo">
+      </tasks-todo>
+      <no-tasks v-else-if="!search"></no-tasks>
+      <tasks-completed
+        v-if="Object.keys(tasksCompleted).length"
+        :tasksCompleted="tasksCompleted"
+      ></tasks-completed>
+    </div>
     <div class="absolute-bottom text-right q-ma-lg">
       <q-btn
         round
@@ -34,10 +35,7 @@
         @click="showAddTask = true"
       />
     </div>
-    <q-dialog
-      v-model="showAddTask"
-      persistent
-    >
+    <q-dialog v-model="showAddTask" persistent>
       <add-task />
     </q-dialog>
   </q-page>
