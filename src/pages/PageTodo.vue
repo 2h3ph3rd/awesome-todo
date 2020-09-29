@@ -25,12 +25,13 @@
         :tasksCompleted="tasksCompleted"
       />
     </div>
-    <div class="absolute-bottom text-right q-ma-lg">
+    <div class="absolute-bottom text-right q-ma-lg no-pointer-events">
       <q-btn
         round
         color="primary"
         size="lg"
         icon="add"
+        class="all-pointer-events"
         @click="showAddTask = true"
       />
     </div>
