@@ -3,55 +3,109 @@ import { uid } from 'quasar'
 
 const state = {
   tasks: {
-    ID1: {
+    ID0: {
       name: 'Go to shop',
       dueDate: '2020/09/02',
       dueTime: '10:30',
+      completed: false
+    },
+    ID1: {
+      name: 'Buy bananas',
+      dueDate: '2020/09/01',
+      dueTime: '12:30',
       completed: false
     },
     ID2: {
-      name: 'Buy bananas',
-      dueDate: '2020/09/01',
-      dueTime: '12:30',
+      name: 'Buy apples',
+      dueDate: '2020/09/04',
+      dueTime: '18:30',
       completed: false
     },
     ID3: {
-      name: 'Buy apples',
-      dueDate: '2020/09/04',
-      dueTime: '18:30',
+      name: 'Go to shop',
+      dueDate: '2020/09/02',
+      dueTime: '10:30',
       completed: false
     },
     ID4: {
-      name: 'Go to shop',
-      dueDate: '2020/09/02',
-      dueTime: '10:30',
-      completed: false
-    },
-    ID5: {
       name: 'Buy bananas',
       dueDate: '2020/09/01',
       dueTime: '12:30',
       completed: false
     },
-    ID6: {
+    ID5: {
       name: 'Buy apples',
       dueDate: '2020/09/04',
       dueTime: '18:30',
       completed: false
     },
-    ID7: {
+    ID6: {
       name: 'Go to shop',
       dueDate: '2020/09/02',
       dueTime: '10:30',
       completed: false
     },
-    ID8: {
+    ID7: {
       name: 'Buy bananas',
       dueDate: '2020/09/01',
       dueTime: '12:30',
       completed: false
     },
+    ID8: {
+      name: 'Buy apples',
+      dueDate: '2020/09/04',
+      dueTime: '18:30',
+      completed: false
+    },
     ID9: {
+      name: 'Go to shop',
+      dueDate: '2020/09/02',
+      dueTime: '10:30',
+      completed: false
+    },
+    ID10: {
+      name: 'Buy bananas',
+      dueDate: '2020/09/01',
+      dueTime: '12:30',
+      completed: false
+    },
+    ID11: {
+      name: 'Buy apples',
+      dueDate: '2020/09/04',
+      dueTime: '18:30',
+      completed: false
+    },
+    ID12: {
+      name: 'Go to shop',
+      dueDate: '2020/09/02',
+      dueTime: '10:30',
+      completed: false
+    },
+    ID13: {
+      name: 'Buy bananas',
+      dueDate: '2020/09/01',
+      dueTime: '12:30',
+      completed: false
+    },
+    ID14: {
+      name: 'Buy apples',
+      dueDate: '2020/09/04',
+      dueTime: '18:30',
+      completed: false
+    },
+    ID15: {
+      name: 'Go to shop',
+      dueDate: '2020/09/02',
+      dueTime: '10:30',
+      completed: false
+    },
+    ID16: {
+      name: 'Buy bananas',
+      dueDate: '2020/09/01',
+      dueTime: '12:30',
+      completed: false
+    },
+    ID17: {
       name: 'Buy apples',
       dueDate: '2020/09/04',
       dueTime: '18:30',
