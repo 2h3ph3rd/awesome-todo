@@ -18,13 +18,12 @@
       No search results
     </p>
     <div class="relative-position">
-      <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo">
-      </tasks-todo>
-      <no-tasks v-else-if="!search"></no-tasks>
+      <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo" />
+      <no-tasks v-else-if="!search" />
       <tasks-completed
         v-if="Object.keys(tasksCompleted).length"
         :tasksCompleted="tasksCompleted"
-      ></tasks-completed>
+      />
     </div>
     <div class="absolute-bottom text-right q-ma-lg">
       <q-btn

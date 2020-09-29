@@ -20,6 +20,42 @@ const state = {
       dueDate: '2020/09/04',
       dueTime: '18:30',
       completed: false
+    },
+    ID4: {
+      name: 'Go to shop',
+      dueDate: '2020/09/02',
+      dueTime: '10:30',
+      completed: false
+    },
+    ID5: {
+      name: 'Buy bananas',
+      dueDate: '2020/09/01',
+      dueTime: '12:30',
+      completed: false
+    },
+    ID6: {
+      name: 'Buy apples',
+      dueDate: '2020/09/04',
+      dueTime: '18:30',
+      completed: false
+    },
+    ID7: {
+      name: 'Go to shop',
+      dueDate: '2020/09/02',
+      dueTime: '10:30',
+      completed: false
+    },
+    ID8: {
+      name: 'Buy bananas',
+      dueDate: '2020/09/01',
+      dueTime: '12:30',
+      completed: false
+    },
+    ID9: {
+      name: 'Buy apples',
+      dueDate: '2020/09/04',
+      dueTime: '18:30',
+      completed: false
     }
   },
   search: '',
@@ -52,7 +88,7 @@ const actions = {
     commit('deleteTask', id)
   },
   addTask: ({ commit }, task) => {
-    let taskId = uid()
+    let taskId = uid
     let payload = {
       id: taskId,
       task: task

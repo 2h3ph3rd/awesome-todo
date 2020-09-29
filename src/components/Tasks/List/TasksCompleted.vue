@@ -6,14 +6,7 @@
   >
     <div class="q-mt-lg">
       <list-header bgColor="bg-green-4">Completed</list-header>
-      <q-list separator bordered>
-        <task
-          v-for="(task, id) in tasksCompleted"
-          :key="id"
-          :task="task"
-          :id="id"
-        ></task>
-      </q-list>
+      <list-content :tasks="tasksCompleted" />
     </div>
   </transition>
 </template>
@@ -22,7 +15,7 @@
 export default {
   props: ['tasksCompleted'],
   components: {
-    task: require('components/Tasks/List/Shared/ListTask').default,
+    'list-content': require('components/Tasks/List/Shared/ListContent').default,
     'list-header': require('components/Tasks/List/Shared/ListHeader').default
   }
 }
