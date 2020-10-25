@@ -2,6 +2,8 @@
 
 A Quasar app for manage todo
 
+[View on Netlify](https://awesome-todo-project.netlify.app)
+
 This project contains an implementation of "Awesome Todo" app shown in the Udemy's course [Quasar Framework: Cross-Platform Vue JS Vuex & Firebase Apps](https://www.udemy.com/course/quasarframework/).
 
 ## Install the dependencies
