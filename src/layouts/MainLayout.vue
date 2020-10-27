@@ -3,12 +3,26 @@
     <q-header elevated>
       <q-toolbar>
         <q-toolbar-title class="absolute-center">Awesome Todo</q-toolbar-title>
+        <q-btn
+          flat
+          icon-right="account_circle"
+          label="Login"
+          to="/auth"
+          class="absolute-right"
+        />
       </q-toolbar>
     </q-header>
 
-    <q-footer class="lt-md" :v-show="$q.screen.lt.md">
+    <q-footer
+      class="lt-md"
+      :v-show="$q.screen.lt.md"
+    >
       <q-tabs align="center">
-        <TabLink v-for="link in links" :link="link" :key="link.title" />
+        <TabLink
+          v-for="link in links"
+          :link="link"
+          :key="link.title"
+        />
       </q-tabs>
     </q-footer>
 
@@ -20,10 +34,17 @@
       :v-show="$q.screen.gt.md"
     >
       <q-list>
-        <q-item-label header class="text-grey-8">
+        <q-item-label
+          header
+          class="text-grey-8"
+        >
           Navigation
         </q-item-label>
-        <EssentialLink v-for="link in links" :key="link.title" :link="link" />
+        <EssentialLink
+          v-for="link in links"
+          :key="link.title"
+          :link="link"
+        />
       </q-list>
     </q-drawer>
     <q-page-container>
@@ -52,7 +73,7 @@ export default {
     EssentialLink: require('components/EssentialLink.vue').default,
     TabLink: require('components/TabLink').default,
   },
-  data() {
+  data () {
     return {
       leftDrawerOpen: false,
       links: linksData,
