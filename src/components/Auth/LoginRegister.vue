@@ -17,7 +17,7 @@
         ]"
         ref="email"
         outlined
-        v-model="email"
+        v-model="form.email"
         label="Email"
         lazy-rules
       />
@@ -27,7 +27,7 @@
         class="col"
         outlined
         ref="password"
-        v-model="password"
+        v-model="form.password"
         :type="isPwd ? 'password' : 'text'"
         label="Password"
         :rules="[
@@ -53,19 +53,24 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: ['tab'],
   data() {
     return {
-      email: '',
-      password: '',
+      form: {
+        email: '',
+        password: ''
+      },
       isPwd: true
     }
   },
   methods: {
+    ...mapActions('auth', ['registerUser', 'loginUser']),
     onSubmit() {
-      if (this.tab == 'login') console.log(this.tab)
-      else console.log(this.tab)
+      if (this.tab == 'login') this.loginUser(this.form)
+      else this.registerUser(this.form)
     },
     isValidEmailAddress(email) {
       const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
