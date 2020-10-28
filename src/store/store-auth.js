@@ -1,8 +1,14 @@
 import { firebaseAuth } from 'boot/firebase'
 
-const state = {}
+const state = {
+  loggedIn: false
+}
 
-const mutations = {}
+const mutations = {
+  setLoggedIn(state, value) {
+    state.loggedIn = value
+  }
+}
 
 const actions = {
   registerUser({}, payload) {
@@ -24,6 +30,18 @@ const actions = {
       .catch(error => {
         console.log('error: ', error.message)
       })
+  },
+  handleAuthStateChange({ commit }, payload) {
+    firebaseAuth.onAuthStateChanged(user => {
+      if (user) {
+        commit('setLoggedIn', true)
+      } else {
+        commit('setLoggedIn', false)
+      }
+    })
+  },
+  logoutUser() {
+    firebaseAuth.signOut()
   }
 }
 
