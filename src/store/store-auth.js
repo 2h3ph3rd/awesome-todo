@@ -37,11 +37,11 @@ const actions = {
       if (user) {
         commit('setLoggedIn', true)
         LocalStorage.set('loggedIn', true)
-        this.$router.push('/')
+        this.$router.push('/').catch(_ => {})
       } else {
         commit('setLoggedIn', false)
         LocalStorage.set('loggedIn', false)
-        this.$router.replace('/auth')
+        this.$router.replace('/auth').catch(_ => {})
       }
     })
   },
