@@ -33,7 +33,6 @@ const actions = {
   },
   loadSettings({ commit }) {
     let settings = LocalStorage.getItem('settings')
-    console.log(settings)
     if (settings != '') commit('setSettings', settings)
   }
 }
