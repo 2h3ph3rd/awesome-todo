@@ -1,5 +1,5 @@
 import { firebaseAuth } from 'boot/firebase'
-import { LocalStorage } from 'quasar'
+import { LocalStorage, Loading } from 'quasar'
 import { showErrorMessage } from 'src/functions/function-show-error-message'
 
 const state = {
@@ -14,22 +14,28 @@ const mutations = {
 
 const actions = {
   registerUser({}, payload) {
+    Loading.show()
     firebaseAuth
       .createUserWithEmailAndPassword(payload.email, payload.password)
       .then(response => {
+        Loading.hide()
         console.log('response: ', response)
       })
       .catch(error => {
+        Loading.hide()
         showErrorMessage(error.message)
       })
   },
   loginUser({}, payload) {
+    Loading.show()
     firebaseAuth
       .signInWithEmailAndPassword(payload.email, payload.password)
       .then(response => {
+        Loading.hide()
         console.log('response: ', response)
       })
       .catch(error => {
+        Loading.hide()
         showErrorMessage(error.message)
       })
   },
