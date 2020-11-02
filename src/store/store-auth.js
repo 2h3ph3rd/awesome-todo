@@ -17,9 +17,8 @@ const actions = {
     Loading.show()
     firebaseAuth
       .createUserWithEmailAndPassword(payload.email, payload.password)
-      .then(response => {
+      .then(_ => {
         Loading.hide()
-        console.log('response: ', response)
       })
       .catch(error => {
         Loading.hide()
@@ -30,21 +29,21 @@ const actions = {
     Loading.show()
     firebaseAuth
       .signInWithEmailAndPassword(payload.email, payload.password)
-      .then(response => {
+      .then(_ => {
         Loading.hide()
-        console.log('response: ', response)
       })
       .catch(error => {
         Loading.hide()
         showErrorMessage(error.message)
       })
   },
-  handleAuthStateChange({ commit }, payload) {
+  handleAuthStateChange({ commit, dispatch }, payload) {
     firebaseAuth.onAuthStateChanged(user => {
       if (user) {
         commit('setLoggedIn', true)
         LocalStorage.set('loggedIn', true)
         this.$router.push('/').catch(_ => {})
+        dispatch('tasks/firebaseReadData', null, { root: true })
       } else {
         commit('setLoggedIn', false)
         LocalStorage.set('loggedIn', false)
