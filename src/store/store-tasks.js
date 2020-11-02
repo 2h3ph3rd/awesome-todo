@@ -13,6 +13,9 @@ const mutations = {
   updateTask(state, payload) {
     Object.assign(state.tasks[payload.id], payload.updates)
   },
+  clearTasks(state) {
+    state.tasks = {}
+  },
   deleteTask(state, id) {
     Vue.delete(state.tasks, id)
   },
@@ -55,32 +58,48 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let userTasksRef = firebaseDb.ref('tasks/' + userId)
     // initial check for data event
-    userTasksRef.once('value', _ => {
-      commit('setTasksDownloaded', true)
-    })
+    userTasksRef.once(
+      'value',
+      _ => {
+        commit('setTasksDownloaded', true)
+      },
+      error => console.log(error)
+    )
     // add task event
-    userTasksRef.on('child_added', snapshot => {
-      let task = snapshot.val()
-      let payload = {
-        id: snapshot.key,
-        task: task
-      }
-      commit('addTask', payload)
-    })
+    userTasksRef.on(
+      'child_added',
+      snapshot => {
+        let task = snapshot.val()
+        let payload = {
+          id: snapshot.key,
+          task: task
+        }
+        commit('addTask', payload)
+      },
+      error => console.log(error)
+    )
     // changed task event
-    userTasksRef.on('child_changed', snapshot => {
-      let task = snapshot.val()
-      let payload = {
-        id: snapshot.key,
-        updates: task
-      }
-      commit('updateTask', payload)
-    })
+    userTasksRef.on(
+      'child_changed',
+      snapshot => {
+        let task = snapshot.val()
+        let payload = {
+          id: snapshot.key,
+          updates: task
+        }
+        commit('updateTask', payload)
+      },
+      error => console.log(error)
+    )
     // removed task event
-    userTasksRef.on('child_removed', snapshot => {
-      let taskId = snapshot.key
-      commit('deleteTask', taskId)
-    })
+    userTasksRef.on(
+      'child_removed',
+      snapshot => {
+        let taskId = snapshot.key
+        commit('deleteTask', taskId)
+      },
+      error => console.log(error)
+    )
   },
   firebaseAddTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid

@@ -40,12 +40,15 @@ const actions = {
   handleAuthStateChange({ commit, dispatch }, payload) {
     firebaseAuth.onAuthStateChanged(user => {
       if (user) {
+        // login
         commit('setLoggedIn', true)
         LocalStorage.set('loggedIn', true)
         this.$router.push('/').catch(_ => {})
         dispatch('tasks/firebaseReadData', null, { root: true })
       } else {
+        // logout
         commit('tasks/setTasksDownloaded', false, { root: true })
+        commit('tasks/clearTasks', null, { root: true })
         commit('setLoggedIn', false)
         LocalStorage.set('loggedIn', false)
         this.$router.replace('/auth').catch(_ => {})
