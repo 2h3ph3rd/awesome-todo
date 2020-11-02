@@ -5,7 +5,8 @@ import { firebaseDb, firebaseAuth } from 'boot/firebase'
 const state = {
   tasks: {},
   search: '',
-  sort: 'name'
+  sort: 'name',
+  tasksDownloaded: false
 }
 
 const mutations = {
@@ -23,6 +24,9 @@ const mutations = {
   },
   setSort(state, value) {
     state.sort = value
+  },
+  setTasksDownloaded(state, value) {
+    state.tasksDownloaded = value
   }
 }
 
@@ -50,6 +54,10 @@ const actions = {
   firebaseReadData({ commit }) {
     let userId = firebaseAuth.currentUser.uid
     let userTasksRef = firebaseDb.ref('tasks/' + userId)
+    // initial check for data event
+    userTasksRef.once('value', _ => {
+      commit('setTasksDownloaded', true)
+    })
     // add task event
     userTasksRef.on('child_added', snapshot => {
       let task = snapshot.val()
