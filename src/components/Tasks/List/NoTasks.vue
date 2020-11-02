@@ -14,7 +14,7 @@
           flat
           color="primary"
           label="Add task"
-          @click="$root.$emit('show-add-task')"
+          @click="$emit('show-add-task-dialog')"
         />
       </template>
     </q-banner>

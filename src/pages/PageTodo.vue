@@ -23,7 +23,10 @@
           v-if="Object.keys(tasksTodo).length"
           :tasksTodo="tasksTodo"
         />
-        <no-tasks v-else-if="!search && !settings.showTasksInOneList" />
+        <no-tasks
+          v-else-if="!search && !settings.showTasksInOneList"
+          @show-add-task-dialog="showAddTaskDialog = true"
+        />
         <tasks-completed
           v-if="Object.keys(tasksCompleted).length"
           :tasksCompleted="tasksCompleted"
