@@ -8,18 +8,17 @@
         <sort></sort>
       </div>
     </div>
-    <p v-if="
+    <p
+      v-if="
         search &&
           !Object.keys(tasksTodo).length &&
           !Object.keys(tasksCompleted).length
-      ">
+      "
+    >
       No search results
     </p>
     <div class="relative-position">
-      <tasks-todo
-        v-if="Object.keys(tasksTodo).length"
-        :tasksTodo="tasksTodo"
-      />
+      <tasks-todo v-if="Object.keys(tasksTodo).length" :tasksTodo="tasksTodo" />
       <no-tasks v-else-if="!search && !settings.showTasksInOneList" />
       <tasks-completed
         v-if="Object.keys(tasksCompleted).length"
@@ -33,14 +32,11 @@
         size="lg"
         icon="add"
         class="all-pointer-events"
-        @click="showAddTask = true"
+        @click="showAddTaskDialog = true"
       />
     </div>
-    <q-dialog
-      v-model="showAddTask"
-      persistent
-    >
-      <add-task />
+    <q-dialog v-model="showAddTaskDialog" persistent>
+      <add-task @close="closeAddTaskDialog" />
     </q-dialog>
   </q-page>
 </template>
@@ -50,9 +46,9 @@ import { mapGetters, mapState } from 'vuex'
 
 export default {
   name: 'Index',
-  data () {
+  data() {
     return {
-      showAddTask: false
+      showAddTaskDialog: false
     }
   },
   computed: {
@@ -61,11 +57,14 @@ export default {
     ...mapGetters('settings', ['settings', 'settings'])
   },
   methods: {
-    deleteTask (index) {
+    deleteTask(index) {
       this.tasks.splice(index, 1)
+    },
+    closeAddTaskDialog() {
+      this.showAddTaskDialog = false
     }
   },
-  mounted () {
+  mounted() {
     this.$root.$on('show-add-task', () => (this.showAddTask = true))
   },
   components: {
