@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { uid } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
+import { showErrorMessage } from 'src/functions/function-show-error-message'
 
 const state = {
   tasks: {},
@@ -104,17 +105,23 @@ const actions = {
   firebaseAddTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId)
-    taskRef.push(payload.task)
+    taskRef.push(payload.task, error => {
+      showErrorMessage(error.message)
+    })
   },
   firebaseUpdateTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
-    taskRef.update(payload.updates)
+    taskRef.update(payload.updates, error => {
+      showErrorMessage(error.message)
+    })
   },
   firebaseDeleteTask({}, taskId) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + taskId)
-    taskRef.remove()
+    taskRef.remove(error => {
+      showErrorMessage(error.message)
+    })
   }
 }
 
