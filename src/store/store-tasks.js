@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { uid } from 'quasar'
+import { uid, Notify } from 'quasar'
 import { firebaseDb, firebaseAuth } from 'boot/firebase'
 import { showErrorMessage } from 'src/functions/function-show-error-message'
 
@@ -64,7 +64,10 @@ const actions = {
       _ => {
         commit('setTasksDownloaded', true)
       },
-      error => console.log(error)
+      error => {
+        showErrorMessage(error.message)
+        this.$router.replace('/auth')
+      }
     )
     // add task event
     userTasksRef.on(
@@ -106,21 +109,35 @@ const actions = {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId)
     taskRef.push(payload.task, error => {
-      showErrorMessage(error.message)
+      if (error) {
+        showErrorMessage(error.message)
+      } else {
+        Notify.create('Task added')
+      }
     })
   },
   firebaseUpdateTask({}, payload) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + payload.id)
     taskRef.update(payload.updates, error => {
-      showErrorMessage(error.message)
+      if (error) {
+        showErrorMessage(error.message)
+      } else {
+        let keys = Object.keys(payload.updates)
+        if (!(keys.includes('completed') && keys.length == 1))
+          Notify.create('Task updated')
+      }
     })
   },
   firebaseDeleteTask({}, taskId) {
     let userId = firebaseAuth.currentUser.uid
     let taskRef = firebaseDb.ref('tasks/' + userId + '/' + taskId)
     taskRef.remove(error => {
-      showErrorMessage(error.message)
+      if (error) {
+        showErrorMessage(error.message)
+      } else {
+        Notify.create('Task deleted')
+      }
     })
   }
 }
