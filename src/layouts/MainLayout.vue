@@ -37,9 +37,7 @@
       :v-show="$q.screen.gt.md"
     >
       <q-list>
-        <q-item-label header class="text-grey-8">
-          Navigation
-        </q-item-label>
+        <q-item-label header class="text-grey-8"> Navigation </q-item-label>
         <EssentialLink v-for="link in links" :key="link.title" :link="link" />
       </q-list>
     </q-drawer>

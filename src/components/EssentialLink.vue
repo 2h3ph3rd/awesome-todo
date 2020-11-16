@@ -1,13 +1,6 @@
 <template>
-  <q-item
-    clickable
-    :to="link.link"
-    exact
-  >
-    <q-item-section
-      v-if="link.icon"
-      avatar
-    >
+  <q-item clickable :to="link.link" exact>
+    <q-item-section v-if="link.icon" avatar>
       <q-icon :name="link.icon" />
     </q-item-section>
 
@@ -23,8 +16,8 @@ export default {
   props: {
     link: {
       type: Object,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 }
 </script>

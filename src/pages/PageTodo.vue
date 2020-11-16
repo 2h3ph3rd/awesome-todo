@@ -12,8 +12,8 @@
       <p
         v-if="
           search &&
-            !Object.keys(tasksTodo).length &&
-            !Object.keys(tasksCompleted).length
+          !Object.keys(tasksTodo).length &&
+          !Object.keys(tasksCompleted).length
         "
       >
         No search results

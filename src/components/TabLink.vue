@@ -1,10 +1,5 @@
 <template>
-  <q-route-tab
-    :icon="link.icon"
-    :to="link.link"
-    :label="link.title"
-    exact
-  />
+  <q-route-tab :icon="link.icon" :to="link.link" :label="link.title" exact />
 </template>
 
 <script>
@@ -13,8 +8,8 @@ export default {
   props: {
     link: {
       type: Object,
-      required: true,
-    },
-  },
+      required: true
+    }
+  }
 }
 </script>

@@ -5,10 +5,9 @@
     leave-active-class="animated zoomOut absolute-top"
   >
     <div>
-      <list-header
-        v-if="!settings.showTasksInOneList"
-        bgColor="bg-orange-4"
-      >Todo</list-header>
+      <list-header v-if="!settings.showTasksInOneList" bgColor="bg-orange-4">
+        Todo
+      </list-header>
       <list-content :tasks="tasksTodo" />
     </div>
   </transition>
