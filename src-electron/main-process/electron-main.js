@@ -1,4 +1,5 @@
-import { app, BrowserWindow, nativeTheme } from 'electron'
+import { app, BrowserWindow, nativeTheme, Menu } from 'electron'
+import menuTemplate from './electron-main-menu-template'
 
 try {
   if (
@@ -19,15 +20,27 @@ if (process.env.PROD) {
   global.__statics = __dirname
 }
 
+/*
+  Variables and constants
+*/
+
 let mainWindow
 
-function createWindow() {
+const menu = Menu.buildFromTemplate(menuTemplate)
+
+/*
+  App ready
+*/
+
+app.on('ready', () => {
   /**
    * Initial window options
    */
   mainWindow = new BrowserWindow({
     width: 1000,
     height: 600,
+    minWidth: 800,
+    minHeight: 600,
     useContentSize: true,
     backgroundColor: 'white',
     webPreferences: {
@@ -46,18 +59,18 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-}
 
-app.on('ready', createWindow)
+  Menu.setApplicationMenu(menu)
+})
+
+/*
+  App events
+*/
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
+  app.quit()
 })
 
 app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
+  createWindow()
 })
