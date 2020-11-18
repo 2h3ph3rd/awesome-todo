@@ -25,7 +25,11 @@
 
     <q-footer class="lt-md" :v-show="$q.screen.lt.md">
       <q-tabs align="center">
-        <TabLink v-for="link in links" :link="link" :key="link.title" />
+        <TabLink
+          v-for="menuLink in menuLinks"
+          :link="menuLink"
+          :key="menuLink.title"
+        />
       </q-tabs>
     </q-footer>
 
@@ -38,7 +42,19 @@
     >
       <q-list>
         <q-item-label header class="text-grey-8"> Navigation </q-item-label>
-        <EssentialLink v-for="link in links" :key="link.title" :link="link" />
+        <EssentialLink
+          v-for="menuLink in menuLinks"
+          :key="menuLink.title"
+          :link="menuLink"
+        />
+        <q-item clickable @click="quitApp" class="absolute-bottom">
+          <q-item-section avatar>
+            <q-icon name="power_settings_new" />
+          </q-item-section>
+          <q-item-section>
+            <q-item-label>Quit</q-item-label>
+          </q-item-section>
+        </q-item>
       </q-list>
     </q-drawer>
     <q-page-container>
@@ -50,7 +66,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 
-const linksData = [
+const menuLinksData = [
   {
     title: 'Todo',
     icon: 'list',
@@ -72,14 +88,27 @@ export default {
   data() {
     return {
       leftDrawerOpen: false,
-      links: linksData
+      menuLinks: menuLinksData
     }
   },
   computed: {
     ...mapState('auth', ['loggedIn'])
   },
   methods: {
-    ...mapActions('auth', ['logoutUser'])
+    ...mapActions('auth', ['logoutUser']),
+    quitApp() {
+      this.$q
+        .dialog({
+          title: 'Confirm',
+          message: 'Do you really want to quit?',
+          cancel: true,
+          persistent: true
+        })
+        .onOk(() => {
+          if (this.$q.platform.is.electron)
+            require('electron').ipcRenderer.send('quit-app')
+        })
+    }
   }
 }
 </script>

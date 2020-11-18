@@ -1,4 +1,11 @@
-import { app, BrowserWindow, nativeTheme, Menu } from 'electron'
+import {
+  app,
+  BrowserWindow,
+  nativeTheme,
+  Menu,
+  IpcMain,
+  ipcMain
+} from 'electron'
 import menuTemplate from './electron-main-menu-template'
 
 try {
@@ -73,4 +80,12 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
   createWindow()
+})
+
+/*
+  Ipc events
+*/
+
+ipcMain.on('quit-app', () => {
+  app.quit()
 })
