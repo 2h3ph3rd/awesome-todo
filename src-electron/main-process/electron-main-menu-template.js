@@ -11,6 +11,8 @@ export default [
       { role: 'about' },
       {
         label: 'Settings',
+        accelerator:
+          process.platform === 'darwin' ? 'CommandOrControl+,' : 'Control+,',
         click() {
           mainWindow.webContents.send('show-settings')
         }
