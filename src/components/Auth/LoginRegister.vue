@@ -20,6 +20,7 @@
         v-model="form.email"
         label="Email"
         lazy-rules
+        type="email"
       />
     </div>
     <div class="row q-mb-md">
