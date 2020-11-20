@@ -5,28 +5,32 @@ const isMac = process.platform === 'darwin'
 
 export default [
   // { role: 'appMenu' }
-  {
-    label: app.name,
-    submenu: [
-      { role: 'about' },
-      {
-        label: 'Settings',
-        accelerator:
-          process.platform === 'darwin' ? 'CommandOrControl+,' : 'Control+,',
-        click() {
-          mainWindow.webContents.send('show-settings')
-        }
-      },
-      { type: 'separator' },
-      { role: 'services' },
-      { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideothers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' }
-    ]
-  },
+  isMac
+    ? {
+        label: app.name,
+        submenu: [
+          { role: 'about' },
+          {
+            label: 'Settings',
+            accelerator:
+              process.platform === 'darwin'
+                ? 'CommandOrControl+,'
+                : 'Control+,',
+            click() {
+              mainWindow.webContents.send('show-settings')
+            }
+          },
+          { type: 'separator' },
+          { role: 'services' },
+          { type: 'separator' },
+          { role: 'hide' },
+          { role: 'hideothers' },
+          { role: 'unhide' },
+          { type: 'separator' },
+          { role: 'quit' }
+        ]
+      }
+    : {},
   // { role: 'fileMenu' }
   {
     label: 'File',
