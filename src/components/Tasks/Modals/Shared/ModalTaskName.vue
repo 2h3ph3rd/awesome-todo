@@ -1,7 +1,7 @@
 <template>
   <q-input
     outlined
-    autofocus
+    v-autofocus
     clearable
     v-select-all
     :value="name"
@@ -17,11 +17,12 @@
 
 <script>
 import { selectAll } from 'src/directives/directive-select-all'
+import { autofocus } from 'src/directives/directive-autofocus'
 
 export default {
   props: ['name'],
   directives: {
-    selectAll
+    autofocus
   }
 }
 </script>
